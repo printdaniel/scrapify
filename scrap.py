@@ -1,6 +1,7 @@
 #############################
 from bs4 import BeautifulSoup
 import requests
+import pandas as pd
 #############################
 
 # Constantes
@@ -53,10 +54,8 @@ class ScrapMercadoLibre:
                 'precio': precio.text.strip()
             }
             notebooks_usadas.append(notebook)
-        print(notebooks)
 
         return notebooks_usadas
-
 
     def notebooks(self):
         """ 
@@ -84,8 +83,15 @@ class ScrapMercadoLibre:
 
         return notebooks
 
+    def save_data_csv(self):
+        notebooks_usadas = self.notebooks_usadas()
+        notebooks = self.notebooks()
+        df1 = pd.DataFrame(notebooks_usadas)
+        df2 = pd.DataFrame(notebooks)
+        df1.to_csv('notebooks_usadas.csv', index=False)
+        df2.to_csv('notebooks.csv', index=False)
 
 
 if __name__ == '__main__':
     s1 = ScrapMercadoLibre()
-    s1.notebooks()
+    s1.save_data_csv()
