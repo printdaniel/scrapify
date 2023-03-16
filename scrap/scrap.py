@@ -85,6 +85,7 @@ class ScrapMercadoLibre:
     def save_data_csv(self):
         notebooks_usadas = self.notebooks_usadas()
         notebooks = self.notebooks()
+        print("Extracción de datos exitosa")
         df1 = pd.DataFrame(notebooks_usadas)
         df2 = pd.DataFrame(notebooks)
         df1.to_csv('notebooks_usadas.csv', index=False)

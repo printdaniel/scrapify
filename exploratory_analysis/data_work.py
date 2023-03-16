@@ -8,7 +8,6 @@ df_usadas = pd.read_csv('notebooks_usadas.csv')
 df_nuevas['precio'] = pd.to_numeric(df_nuevas['precio'], errors='coerce')
 df_usadas['precio'] = pd.to_numeric(df_usadas['precio'], errors='coerce')
 
-
 #####################################################################
 #  Top 5 Notebooks más caras Nuevas vs Usadas
 #####################################################################
@@ -20,12 +19,6 @@ df_usadas_sorted = df_usadas.sort_values('precio', ascending=False)
 # Tomar los primeros 5 valores
 nuevas_top_5 = df_usadas_sorted.head(5)
 usadas_top_5 = df_usadas_sorted.head(5)
-
-print("-------Nuevas")
-print(nuevas_top_5)
-print("-------Usadas")
-print(usadas_top_5)
-
 
 # Calcular las métricas para cada categoría
 precio_nuevas_mean = df_nuevas['precio'].mean()
@@ -59,4 +52,10 @@ diccionario_usadas = {
 df_merger = pd.DataFrame([diccionario_nuevas, diccionario_usadas])
 
 # Mostrar el DataFrame resultante
-print(df_merger)
+def imprimir_analisis():
+    print("Nuevas")
+    print(nuevas_top_5)
+    print("\n Usadas")
+    print(usadas_top_5)
+    print("\n Estadísticas")
+    print(df_merger)
