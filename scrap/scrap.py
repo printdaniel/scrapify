@@ -79,7 +79,6 @@ class ScrapMercadoLibre:
                 'precio': precio.text.strip()
             }
             notebooks.append(notebook)
-        print(notebooks)
 
         return notebooks
 
@@ -91,7 +90,3 @@ class ScrapMercadoLibre:
         df1.to_csv('notebooks_usadas.csv', index=False)
         df2.to_csv('notebooks.csv', index=False)
 
-
-if __name__ == '__main__':
-    s1 = ScrapMercadoLibre()
-    s1.save_data_csv()
