@@ -50,6 +50,7 @@ diccionario_usadas = {
 
 # Crear el DataFrame a partir de los diccionarios
 df_merger = pd.DataFrame([diccionario_nuevas, diccionario_usadas])
+df_merger.to_csv('database/estadisticas.csv')
 
 # Mostrar el DataFrame resultante
 def imprimir_analisis():
