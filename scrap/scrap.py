@@ -88,6 +88,6 @@ class ScrapMercadoLibre:
         print("Extracción de datos exitosa")
         df1 = pd.DataFrame(notebooks_usadas)
         df2 = pd.DataFrame(notebooks)
-        df1.to_csv('notebooks_usadas.csv', index=False)
-        df2.to_csv('notebooks.csv', index=False)
+        df1.to_csv('exploratory_analysis/notebooks_usadas.csv', index=False)
+        df2.to_csv('exploratory_analysis/notebooks.csv', index=False)
 

@@ -1,19 +1,13 @@
-import click
 from scrap.scrap import ScrapMercadoLibre
-from exploratory_analysis import data_work
+from exploratory_analysis.data_work import imprimir_analisis
+#from exploratory_analysis import data_work
+import subprocess 
 
-@click.group()
-def main():
-    pass
 
-@main.command()
-def extract():
-    scrap = ScrapMercadoLibre()
+scrap = ScrapMercadoLibre()
 
-@main.command()
-def analyze():
-    data_work.imprimir_analisis()
-    
-
+   
 if __name__ == '__main__':
-    main()
+    scrap.save_data_csv()
+    subprocess.run(['python','exploratory_analysis/data_work.py'])
+    imprimir_analisis()

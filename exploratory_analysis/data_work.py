@@ -1,8 +1,11 @@
 import pandas as pd
 
 # Cargar datos
-df_nuevas = pd.read_csv('notebooks.csv')
-df_usadas = pd.read_csv('notebooks_usadas.csv')
+try:
+    df_nuevas = pd.read_csv('exploratory_analysis/notebooks.csv')
+    df_usadas = pd.read_csv('exploratory_analysis/notebooks_usadas.csv')
+except FileNotFoundError as e:
+    print("Archivo no encontrado", e)
 
 # * Convertir a númerics los datos de precios
 df_nuevas['precio'] = pd.to_numeric(df_nuevas['precio'], errors='coerce')
