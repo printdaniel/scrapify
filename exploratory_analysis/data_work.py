@@ -1,65 +1,86 @@
 import pandas as pd
 
-# Cargar datos
-try:
-    df_nuevas = pd.read_csv('exploratory_analysis/notebooks.csv')
-    df_usadas = pd.read_csv('exploratory_analysis/notebooks_usadas.csv')
-except FileNotFoundError as e:
-    print("Archivo no encontrado", e)
+class DataWork:
+    def __init__(self):
+        pass
 
-# * Convertir a númerics los datos de precios
-df_nuevas['precio'] = pd.to_numeric(df_nuevas['precio'], errors='coerce')
-df_usadas['precio'] = pd.to_numeric(df_usadas['precio'], errors='coerce')
+    def load_data(self):
+        # Cargar datos
+        try:
+            self.df_nuevas = pd.read_csv('exploratory_analysis/notebooks.csv')
+            self.df_usadas = pd.read_csv('exploratory_analysis/notebooks_usadas.csv')
+        except FileNotFoundError as e:
+            print("Archivo no encontrado", e)
 
-#####################################################################
-#  Top 5 Notebooks más caras Nuevas vs Usadas
-#####################################################################
 
-# Ordenar el DataFrame por la columna 'precio' de manera descendente
-df_nuevas_sorted = df_nuevas.sort_values('precio', ascending=False)
-df_usadas_sorted = df_usadas.sort_values('precio', ascending=False)
+    def format_data_type(self):
+        # * Convertir a númerics los datos de precios
+        self.df_nuevas['precio'] = pd.to_numeric(self.df_nuevas['precio'], errors='coerce')
+        self.df_usadas['precio'] = pd.to_numeric(self.df_usadas['precio'], errors='coerce')
+        print("Esto esta bien")
 
-# Tomar los primeros 5 valores
-nuevas_top_5 = df_usadas_sorted.head(5)
-usadas_top_5 = df_usadas_sorted.head(5)
+    def data_analystic(self):
+        #############################################
+        #  Top 5 Notebooks más caras Nuevas vs Usadas
+        #############################################
+        
+        # Ordenar el DataFrame por la columna 'precio' de manera descendente
+        self.df_nuevas_sorted = self.df_nuevas.sort_values('precio', ascending=False)
+        self.df_usadas_sorted = self.df_usadas.sort_values('precio', ascending=False)
+        
+        # Tomar los primeros 5 valores
+        self.nuevas_top_5 = self.df_usadas_sorted.head(5)
+        self.usadas_top_5 = self.df_usadas_sorted.head(5)
+        
+        # Calcular las métricas para cada categoría
+        self.precio_nuevas_mean = self.df_nuevas['precio'].mean()
+        self.precio_nuevas_median = self.df_nuevas['precio'].median()
+        self.precio_nuevas_percentiles = self.df_nuevas['precio'].quantile([0.25, 0.50, 0.75])
 
-# Calcular las métricas para cada categoría
-precio_nuevas_mean = df_nuevas['precio'].mean()
-precio_nuevas_median = df_nuevas['precio'].median()
-precio_nuevas_percentiles = df_nuevas['precio'].quantile([0.25, 0.50, 0.75])
+        self.precio_usadas_mean = self.df_usadas['precio'].mean()
+        self.precio_usadas_median = self.df_usadas['precio'].median()
+        self.precio_usadas_percentiles = self.df_usadas['precio'].quantile([0.25, 0.50, 0.75])
+        print("This is fine")
 
-precio_usadas_mean = df_usadas['precio'].mean()
-precio_usadas_median = df_usadas['precio'].median()
-precio_usadas_percentiles = df_usadas['precio'].quantile([0.25, 0.50, 0.75])
 
-# Crear los diccionarios con los valores calculados
-diccionario_nuevas = {
-    'categoria': 'nuevas',
-    'precio': precio_nuevas_mean,
-    'mediana': precio_nuevas_median,
-    'percentil_25': precio_nuevas_percentiles[0.25],
-    'percentil_50': precio_nuevas_percentiles[0.50],
-    'percentil_75': precio_nuevas_percentiles[0.75]
-}
+    def data_export(self):
+        # Crear los diccionarios con los valores calculados
+        diccionario_nuevas = {
+            'categoria': 'nuevas',
+            'precio': self.precio_nuevas_mean,
+            'mediana': self.precio_nuevas_median,
+            'percentil_25': self.precio_nuevas_percentiles[0.25],
+            'percentil_50': self.precio_nuevas_percentiles[0.50],
+            'percentil_75': self.precio_nuevas_percentiles[0.75]
+        }
+        
+        diccionario_usadas = {
+            'categoria': 'usadas',
+            'precio': self.precio_usadas_mean,
+            'mediana': self.precio_usadas_median,
+            'percentil_25': self.precio_usadas_percentiles[0.25],
+            'percentil_50': self.precio_usadas_percentiles[0.50],
+            'percentil_75': self.precio_usadas_percentiles[0.75]
+        }
+        
+        # Crear el DataFrame a partir de los diccionarios
+        self.df_merger = pd.DataFrame([diccionario_nuevas, diccionario_usadas])
+        self.df_merger.to_csv('database/estadisticas.csv')
 
-diccionario_usadas = {
-    'categoria': 'usadas',
-    'precio': precio_usadas_mean,
-    'mediana': precio_usadas_median,
-    'percentil_25': precio_usadas_percentiles[0.25],
-    'percentil_50': precio_usadas_percentiles[0.50],
-    'percentil_75': precio_usadas_percentiles[0.75]
-}
+    def imprimir_analisis(self):
+        # Mostrar el DataFrame resultante
+        print("Nuevas")
+        print(self.nuevas_top_5)
+        print("\n Usadas")
+        print(self.usadas_top_5)
+        print("\n Estadísticas")
+        print(self.df_merger)
 
-# Crear el DataFrame a partir de los diccionarios
-df_merger = pd.DataFrame([diccionario_nuevas, diccionario_usadas])
-df_merger.to_csv('database/estadisticas.csv')
 
-# Mostrar el DataFrame resultante
-def imprimir_analisis():
-    print("Nuevas")
-    print(nuevas_top_5)
-    print("\n Usadas")
-    print(usadas_top_5)
-    print("\n Estadísticas")
-    print(df_merger)
+
+if __name__ == '__main__':
+    dtw = DataWork()
+    dtw.load_data()
+    dtw.format_data_type()
+    dtw.data_analystic()
+    dtw.data_export()
