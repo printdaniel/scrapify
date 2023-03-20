@@ -1,14 +1,14 @@
 from scrap.scrap import ScrapMercadoLibre
 from exploratory_analysis.data_work import DataWork
-import subprocess 
+from database.database import DataBase
 
 
 scrap = ScrapMercadoLibre()
+dtw = DataWork()
+db = DataBase()
 
    
 if __name__ == '__main__':
-    dtw = DataWork()
-    dtw.load_data()
-    dtw.format_data_type()
-    dtw.data_analystic()
-    dtw.data_export()
+    db.show_data_top()
+    db.show_data_last()
+

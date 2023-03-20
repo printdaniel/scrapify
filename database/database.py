@@ -3,9 +3,10 @@ import psycopg2
 import numpy as np
 import pandas as pd
 from psycopg2.extras import execute_values
+from IPython.display import display
 
 try:
-    csv_file = "estadisticas.csv"
+    csv_file = "database/estadisticas.csv"
 except FileExistsError:
     raise "El archivo estadística no se encuentra"
 
@@ -17,7 +18,7 @@ class DataBase:
         self.create_table()
 
     def conexion(self):
-        connection = psycopg2.connect(host="172.22.0.2",
+        connection = psycopg2.connect(host="172.18.0.2",
                                       database="notebooks",
                                       user="root",
                                       password="root")
@@ -66,3 +67,49 @@ class DataBase:
         with self.connection, self.connection.cursor() as cursor:
             execute_values(cursor, query, values)
         print("Datos cargados exitosamente en la tabla estadistica")
+
+
+    def show_data(self):
+        # * Query 
+        query = "SELECT * FROM estadisticas"
+        
+        # Conexión
+        cur = self.connection.cursor()
+        cur.execute(query)
+        rows = cur.fetchall()
+        cur.close()
+
+        df = pd.DataFrame(rows)
+        display(df)
+
+    def show_data_top(self):
+        # Query
+        query = "SELECT * FROM estadisticas ORDER BY fecha DESC LIMIT 4"
+
+        # Conexión
+        cur = self.connection.cursor()
+        cur.execute(query)
+        rows = cur.fetchall()
+        cur.close()
+
+        df = pd.DataFrame(rows)
+        display(df)
+
+    def show_data_last(self):
+        # Query
+        query = "SELECT * FROM estadisticas ORDER BY fecha ASC LIMIT 4"
+
+        # Conexión
+        cur = self.connection.cursor()
+        cur.execute(query)
+        rows = cur.fetchall()
+        cur.close()
+
+        df = pd.DataFrame(rows)
+        display(df)
+
+
+
+
+
+
