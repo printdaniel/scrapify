@@ -1,9 +1,10 @@
 from datetime import datetime
 import psycopg2
-import numpy as np
 import pandas as pd
 from psycopg2.extras import execute_values
 from IPython.display import display
+
+
 
 try:
     csv_file = "database/estadisticas.csv"
@@ -18,21 +19,13 @@ class DataBase:
         self.create_table()
 
     def conexion(self):
-        connection = psycopg2.connect(host="172.18.0.2",
+        connection = psycopg2.connect(host = "172.19.0.2",
                                       database="notebooks",
                                       user="root",
                                       password="root")
         return connection
 
-    def run_query(self, query, parameters=()):
-        try:
-            cursor = self.connection.cursor()
-            cursor.execute(query, parameters)
-            self.connection.commit()
-            cursor.close()
-        except psycopg2.Error as error:
-            print("Error de consulta:", error)
-
+    
     def create_table(self):
         cursor = self.connection.cursor()
         query = '''
@@ -107,9 +100,5 @@ class DataBase:
 
         df = pd.DataFrame(rows)
         display(df)
-
-
-
-
 
 
