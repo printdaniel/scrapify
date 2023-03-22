@@ -1,4 +1,5 @@
 from datetime import datetime
+from .constantes import *
 import psycopg2
 import pandas as pd
 from psycopg2.extras import execute_values
@@ -72,6 +73,7 @@ class DataBase:
         cur.close()
 
         df = pd.DataFrame(rows)
+        df = df.rename(columns=column_names)
         display(df)
 
     def show_data_top(self):
@@ -85,6 +87,7 @@ class DataBase:
         cur.close()
 
         df = pd.DataFrame(rows)
+        df = df.rename(columns=column_names)
         display(df)
 
     def show_data_last(self):
@@ -98,4 +101,5 @@ class DataBase:
         cur.close()
 
         df = pd.DataFrame(rows)
+        df = df.rename(columns=column_names)
         display(df)
