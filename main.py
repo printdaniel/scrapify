@@ -13,7 +13,7 @@ class Menu:
             print("Menú")
             print("1 Extraer datos (Notebooks nuevas vs Notebooks usadas)")
             print("2 Ejecutar Análisis de datos")
-            print("3 Mostrar análisis (Precio, Promedio, Percentiles)")
+            print("3 Mostrar análisis (Precio Promedio, Mediana, Percentiles)")
             print("4 Registrar los datos en la base de datos")
             print("5 Mostrar registros de la base de datos")
             print("6 Mostar últimos tres registros")
@@ -49,6 +49,7 @@ class Menu:
 
             else:
                 print("Opción incorrecta")
+
 
 if __name__ == '__main__':
     menu = Menu()
