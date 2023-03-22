@@ -90,4 +90,5 @@ class ScrapMercadoLibre:
         df2 = pd.DataFrame(notebooks)
         df1.to_csv('exploratory_analysis/notebooks_usadas.csv', index=False)
         df2.to_csv('exploratory_analysis/notebooks.csv', index=False)
+        
 

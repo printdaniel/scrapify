@@ -75,7 +75,16 @@ class DataWork:
         self.df_merger = pd.DataFrame([diccionario_nuevas, diccionario_usadas])
         self.df_merger.to_csv('database/estadisticas.csv')
 
+    def procesar_datos(self):
+        self.load_data()
+        self.format_data_type()
+        self.data_analystic()
+        self.data_export()
+
+
+
     def imprimir_analisis(self):
+        self.procesar_datos()
         # Mostrar el DataFrame resultante
         print("Nuevas")
         print(self.nuevas_top_5)
@@ -84,9 +93,7 @@ class DataWork:
         print("\n Estadísticas")
         print(self.df_merger)
 
-    def main(self):
-        self.load_data()
-        self.format_data_type()
-        self.data_analystic()
-        self.data_export()
-        self.imprimir_analisis()
+
+    def ejecutar_analisis(self):
+        self.procesar_datos()
+        print("Análisis listo")

@@ -5,7 +5,6 @@ from psycopg2.extras import execute_values
 from IPython.display import display
 
 
-
 try:
     csv_file = "database/estadisticas.csv"
 except FileExistsError:
@@ -19,7 +18,7 @@ class DataBase:
         self.create_table()
 
     def conexion(self):
-        connection = psycopg2.connect(host = "172.19.0.2",
+        connection = psycopg2.connect(host = "postgres",
                                       database="notebooks",
                                       user="root",
                                       password="root")
@@ -100,5 +99,3 @@ class DataBase:
 
         df = pd.DataFrame(rows)
         display(df)
-
-
