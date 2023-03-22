@@ -1,9 +1,11 @@
+##########################################
 from datetime import datetime
 from .constantes import *
 import psycopg2
 import pandas as pd
 from psycopg2.extras import execute_values
 from IPython.display import display
+##########################################
 
 try:
     csv_file = "database/estadisticas.csv"
@@ -69,6 +71,7 @@ class DataBase:
         rows = cur.fetchall()
         cur.close()
 
+        # DataFrame and visual data
         df = pd.DataFrame(rows)
         df = df.rename(columns=column_names)
         display(df)
@@ -83,6 +86,8 @@ class DataBase:
         rows = cur.fetchall()
         cur.close()
 
+
+        # DataFrame and visual data
         df = pd.DataFrame(rows)
         df = df.rename(columns=column_names)
         display(df)
@@ -97,6 +102,7 @@ class DataBase:
         rows = cur.fetchall()
         cur.close()
 
+        # DataFrame and visual data
         df = pd.DataFrame(rows)
         df = df.rename(columns=column_names)
         display(df)
