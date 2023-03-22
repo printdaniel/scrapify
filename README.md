@@ -31,9 +31,9 @@ Una vez que se ha ejecutado el contenedor Docker, se puede interactuar con el pr
 3. Mostrar análisis (Precio Promedio, Mediana, Percentiles)
 4. Registrar los datos en la base de datos
 5. Mostrar registros de la base de datos
-6. Mostar últimos tres registros
-7. Mostrar primeros registros
-9. Exit
+6. Mostar últimos cuatro registros
+7. Mostrar primeros cuatro registros
+8. Exit
 
 
 ## Autores

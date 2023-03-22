@@ -2,7 +2,9 @@ from scrap.scrap import ScrapMercadoLibre
 from exploratory_analysis.data_work import DataWork
 from database.database import DataBase
 
+
 class Menu:
+
     def __init__(self):
         self.scrap = ScrapMercadoLibre()
         self.data_work = DataWork()
@@ -16,8 +18,8 @@ class Menu:
             print("3 Mostrar análisis (Precio Promedio, Mediana, Percentiles)")
             print("4 Registrar los datos en la base de datos")
             print("5 Mostrar registros de la base de datos")
-            print("6 Mostar últimos tres registros")
-            print("7 Mostrar primeros registros")
+            print("6 Mostar últimos cuatro registros")
+            print("7 Mostrar primeros cuatro registros")
             print("9 Exit")
 
             opcion = input("Seleciones una opción: ")
@@ -26,7 +28,7 @@ class Menu:
                 self.scrap.save_data_csv()
 
             elif opcion == "2":
-                self.data_work.main()
+                self.data_work.ejecutar_analisis()
 
             elif opcion == "3":
                 self.data_work.imprimir_analisis()
@@ -41,7 +43,7 @@ class Menu:
                 self.db.show_data_top()
 
             elif opcion == "7":
-                self.db.show_data_first()
+                self.db.show_data_last()
 
             elif opcion == "9":
                 print("Programa finalizado")

@@ -83,12 +83,16 @@ class ScrapMercadoLibre:
         return notebooks
 
     def save_data_csv(self):
-        notebooks_usadas = self.notebooks_usadas()
-        notebooks = self.notebooks()
-        print("Extracción de datos exitosa")
+        try:
+            notebooks_usadas = self.notebooks_usadas()
+            notebooks = self.notebooks()
+            print("\n Extracción de datos exitosa")
+        except EOFError as e:
+            print(e)
+            return 0
+        
         df1 = pd.DataFrame(notebooks_usadas)
         df2 = pd.DataFrame(notebooks)
+        
         df1.to_csv('exploratory_analysis/notebooks_usadas.csv', index=False)
         df2.to_csv('exploratory_analysis/notebooks.csv', index=False)
-        
-

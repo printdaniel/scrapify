@@ -81,8 +81,6 @@ class DataWork:
         self.data_analystic()
         self.data_export()
 
-
-
     def imprimir_analisis(self):
         self.procesar_datos()
         # Mostrar el DataFrame resultante
@@ -92,7 +90,6 @@ class DataWork:
         print(self.usadas_top_5)
         print("\n Estadísticas")
         print(self.df_merger)
-
 
     def ejecutar_analisis(self):
         self.procesar_datos()

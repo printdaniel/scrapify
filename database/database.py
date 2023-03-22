@@ -5,7 +5,6 @@ import pandas as pd
 from psycopg2.extras import execute_values
 from IPython.display import display
 
-
 try:
     csv_file = "database/estadisticas.csv"
 except FileExistsError:
@@ -19,13 +18,12 @@ class DataBase:
         self.create_table()
 
     def conexion(self):
-        connection = psycopg2.connect(host = "postgres",
+        connection = psycopg2.connect(host="postgres",
                                       database="notebooks",
                                       user="root",
                                       password="root")
         return connection
 
-    
     def create_table(self):
         cursor = self.connection.cursor()
         query = '''
@@ -61,11 +59,10 @@ class DataBase:
             execute_values(cursor, query, values)
         print("Datos cargados exitosamente en la tabla estadistica")
 
-
     def show_data(self):
-        # * Query 
+        # * Query
         query = "SELECT * FROM estadisticas"
-        
+
         # Conexión
         cur = self.connection.cursor()
         cur.execute(query)
