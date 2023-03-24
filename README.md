@@ -20,7 +20,8 @@ El proyecto consta de tres módulos principales:
 
 1. Clonar el repositorio: `git clone https://github.com/tu_usuario/scrapify.git`
 2. Entrar al directorio: `cd scrapify`
-3. Ejecutar el siguiente comando: `docker-compose run myapp`
+3. Ejecutar el siguiente comando: `docker-compose up -d --build`
+4. Ejecutar el siguiente comando: `docker-compose run myapp`
 
 ## Uso
 
