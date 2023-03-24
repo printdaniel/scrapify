@@ -86,7 +86,7 @@ class ScrapMercadoLibre:
         try:
             notebooks_usadas = self.notebooks_usadas()
             notebooks = self.notebooks()
-            print("\n Extracción de datos exitosa")
+            print("\n Extracción de datos exitosa \n")
         except EOFError as e:
             print(e)
             return 0

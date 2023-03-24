@@ -2,6 +2,7 @@
 from scrap.scrap import ScrapMercadoLibre
 from exploratory_analysis.data_work import DataWork
 from database.database import DataBase
+import os
 ###################################################
 
 
@@ -30,21 +31,27 @@ class Menu:
                 self.scrap.save_data_csv()
 
             elif opcion == "2":
+                os.system('cls' if os.name == 'nt' else 'clear')
                 self.data_work.ejecutar_analisis()
 
             elif opcion == "3":
+                os.system('cls' if os.name == 'nt' else 'clear')
                 self.data_work.imprimir_analisis()
 
             elif opcion == "4":
+                os.system('cls' if os.name == 'nt' else 'clear')
                 self.db.load_data()
 
             elif opcion == "5":
+                os.system('cls' if os.name == 'nt' else 'clear')
                 self.db.show_data()
 
             elif opcion == "6":
+                os.system('cls' if os.name == 'nt' else 'clear')
                 self.db.show_data_top()
 
             elif opcion == "7":
+                os.system('cls' if os.name == 'nt' else 'clear')
                 self.db.show_data_last()
 
             elif opcion == "9":

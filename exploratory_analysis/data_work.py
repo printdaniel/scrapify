@@ -24,7 +24,6 @@ class DataWork:
                                                  errors='coerce')
         self.df_usadas['precio'] = pd.to_numeric(self.df_usadas['precio'],
                                                  errors='coerce')
-        print("Esto esta bien")
 
     def data_analystic(self):
         #############################################
@@ -51,7 +50,6 @@ class DataWork:
         self.precio_usadas_median = self.df_usadas['precio'].median()
         self.precio_usadas_percentiles = self.df_usadas['precio'].quantile(
             [0.25, 0.50, 0.75])
-        print("This is fine")
 
     def data_export(self):
         # Crear los diccionarios con los valores calculados
