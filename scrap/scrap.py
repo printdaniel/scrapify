@@ -2,11 +2,19 @@
 from bs4 import BeautifulSoup
 import requests
 import pandas as pd
+import logging
 #############################
 
 # Constantes
 NOTEBOOKS_ML_U = 'https://listado.mercadolibre.com.ar/notebooks-usadas#D[A:notebooks%20usadas]'
 NOTEBOOKS_ML = 'https://listado.mercadolibre.com.ar/notebooks#D[A:notebooks]'
+
+# Logger config
+logging.basicConfig(level=logging.DEBUG, 
+                    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+
+logger = logging.getLogger('Scrapify')
+
 
 
 class ScrapMercadoLibre:
@@ -19,6 +27,7 @@ class ScrapMercadoLibre:
         Returns:
             soup: html parsed
         """
+        logger.info("Validator")
 
         header = {
             'User-Agent':
@@ -64,6 +73,8 @@ class ScrapMercadoLibre:
             Nombre
             Precio
         """
+        logger.info("Información Notebooks")
+
         soup = self.validator_soup(NOTEBOOKS_ML)
         nombres = soup.find_all(
             'h2', class_='ui-search-item__title shops__item-title')
@@ -83,6 +94,8 @@ class ScrapMercadoLibre:
         return notebooks
 
     def save_data_csv(self):
+        logger.info("Información guardada en csv")
+
         try:
             notebooks_usadas = self.notebooks_usadas()
             notebooks = self.notebooks()
